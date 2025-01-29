@@ -16,33 +16,42 @@ namespace Server.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(User user)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest("Invalid data");
+                if (string.IsNullOrEmpty(user.Username) || string.IsNullOrEmpty(user.Password))
+                {
+                    return BadRequest("Username and password are required");
+                }
+
+                var userDB = await _database.User.FindAsync(user.Username);
+                if (userDB != null)
+                {
+                    return Conflict("User already exists");
+                }
+
+                _database.User.Add(user);
+
+                await _database.SaveChangesAsync();
+                return Ok();
             }
-            var userDB = await _database.User.FindAsync(user.Username);
-            if (userDB != null)
+            catch (Exception e)
             {
-                return Conflict("User already exists");
+                Console.Error.WriteLine(e.Message);
+                return StatusCode(500);
             }
-
-            _database.User.Add(user);
-
-            await _database.SaveChangesAsync();
-            return Ok();
         }
 
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(User user)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Invalid data");
-            }
-
             try
             {
+                if (string.IsNullOrEmpty(user.Username) || string.IsNullOrEmpty(user.Password))
+                {
+                    return BadRequest("Username and password are required");
+                }
+
                 var userDB = await _database.User.FindAsync(user.Username);
                 if (userDB == null)
                 {

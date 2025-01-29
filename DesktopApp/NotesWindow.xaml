@@ -17,6 +17,7 @@
                 <ColumnDefinition Width="5*" />
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Content="New note" Click="NewNote" Margin="20" />
+            <Button Grid.Column="1" Content="Log out" Click="Logout" Margin="20" />
         </Grid>
         <Grid Grid.Row="1" Margin="10">
             <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">

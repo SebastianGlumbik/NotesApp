@@ -65,10 +65,6 @@ namespace Server.Controllers
             if (HttpContext.Session.GetString("username") == null)
                 return Unauthorized("Not logged in");
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Invalid data");
-            }
             try
             {
                 var noteDB = await _database.Note.FindAsync(note.IdNote);
@@ -97,11 +93,6 @@ namespace Server.Controllers
         {
             if (HttpContext.Session.GetString("username") == null)
                 return Unauthorized("Not logged in");
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Invalid data");
-            }
 
             if (note.Username != HttpContext.Session.GetString("username"))
             {
