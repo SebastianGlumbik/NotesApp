@@ -21,7 +21,7 @@ namespace DesktopApp
         {
             try
             {
-                var notes = await Note.GetNotesAsync();
+                var notes = await Note.GetAllAsync();
                 Notes.Clear();
                 foreach (var note in notes ?? [])
                 {
@@ -41,7 +41,7 @@ namespace DesktopApp
             noteWindow.OnSave += async note => {
                 try
                 {
-                    await note.AddNoteAsync();
+                    await note.AddAsync();
                     LoadNotesAsync();
                 }
                 catch (Exception e)
@@ -65,7 +65,7 @@ namespace DesktopApp
             noteWindow.OnSave += async note => {
                 try
                 {
-                    await note.UpdateNoteAsync();
+                    await note.UpdateAsync();
                     LoadNotesAsync();
                 }
                 catch (Exception e)
@@ -88,7 +88,7 @@ namespace DesktopApp
             this.Notes.Remove(note);
             try
             {
-                await note.DeleteNoteAsync();
+                await note.DeleteAsync();
                 LoadNotesAsync();
             }
             catch (Exception ex)

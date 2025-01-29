@@ -15,7 +15,7 @@ namespace DesktopApp
         /// Gets all notes from the server
         /// </summary>
         /// <exception cref="Exception"></exception>
-        public static async Task<List<Note>> GetNotesAsync()
+        public static async Task<List<Note>> GetAllAsync()
         {
             try
             {
@@ -32,7 +32,7 @@ namespace DesktopApp
         /// Adds a new note to the server
         /// </summary>
         /// <exception cref="Exception"></exception>
-        public async Task AddNoteAsync()
+        public async Task AddAsync()
         {
             var options = new JsonSerializerOptions
             {
@@ -54,7 +54,7 @@ namespace DesktopApp
         /// Updates a note on the server
         /// </summary>
         /// <exception cref="Exception"></exception>
-        public async Task UpdateNoteAsync()
+        public async Task UpdateAsync()
         {
             var options = new JsonSerializerOptions
             {
@@ -75,7 +75,7 @@ namespace DesktopApp
         /// Deletes a note from the server
         /// </summary>
         /// <exception cref="Exception"></exception>
-        public async Task DeleteNoteAsync()
+        public async Task DeleteAsync()
         {
             try
             {

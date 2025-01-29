@@ -2,11 +2,13 @@
 
 namespace DesktopApp
 {
-    public delegate void SaveNote(Note n);
+    
     public partial class NoteWindow : Window
     {
         public Note Note { get; set; }
+        public delegate void SaveNote(Note n);
         public event SaveNote? OnSave;
+        
         public NoteWindow(Note note)
         {
             InitializeComponent();
